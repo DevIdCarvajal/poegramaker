@@ -1,8 +1,9 @@
 import React from 'react'
+import './Select.css'
 
 
 
-export default function Select({type, data, value, getValue}) {
+export default function Select({type, data, value, getValue, field}) {
     
     const renderOptions = () => {
         if( type === "author" ){
@@ -21,8 +22,9 @@ export default function Select({type, data, value, getValue}) {
 
     return (
         <React.Fragment>
-            <select name={type} value={value} onChange={(e) => getValue(e.target.value)}>
-                <option value="">Elige una opción</option>
+            <p className="select-label">{}</p>
+            <select name={type} value={value} onChange={(e) => getValue(e.target.value)} className="select">
+                <option value="">{field}</option>
                 {renderOptions(type)}
             </select>
         </React.Fragment>

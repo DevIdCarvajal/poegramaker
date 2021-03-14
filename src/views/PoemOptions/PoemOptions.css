@@ -1,0 +1,36 @@
+.form-container{
+    width: 100%;
+    padding: 0px 0px 25px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.select-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.button{
+    background-color: #f19c79;
+    color: white;
+    font-weight: bold;
+    padding: 16px 32px;
+    border-radius: 4px;
+    border: transparent;
+    box-shadow: 0px 8px 0px 0px #a44a3f;
+    text-transform: uppercase;
+    transform: translateY(0px);
+    transition: transform box-shadow 0.1s;
+}
+
+.button:hover{
+    background-color: #dd8965;
+}
+
+.button:active{
+    transform: translateY(5px);
+    box-shadow: none;
+
+}
