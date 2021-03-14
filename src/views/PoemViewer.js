@@ -1,7 +1,9 @@
-const PoemViewer = (props) => {
+const PoemViewer = ({poem}) => {
   return (
     <div>
-      {props.map(verse => `${verse}<br>`)}
+      {poem.map(verse => `${verse}<br>`)}
     </div>
   );
 };
+
+export default PoemViewer

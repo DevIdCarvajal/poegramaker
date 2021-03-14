@@ -1,4 +1,4 @@
-class PoetryProvider {
+export default class PoetryProvider {
   constructor() {}
 
   getAuthors() {
