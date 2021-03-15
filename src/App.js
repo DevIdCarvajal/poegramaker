@@ -12,11 +12,14 @@ function App() {
   const [poem, setPoem] = useState(null)
   
   useEffect(() => {
-    setPoem({
-      paragraphs: options.paragraphs,
-      verses: options.verses,
-      text: Poemaker(options.paragraphs, options.verses, options.book, options.author)
-    }) 
+    setPoem(null)
+    setTimeout(() => {
+      setPoem({
+        paragraphs: options.paragraphs,
+        verses: options.verses,
+        text: Poemaker(options.paragraphs, options.verses, options.book, options.author)
+      }) 
+    }, 1500);
   }, [options])
 
   const getValues = (values) =>{

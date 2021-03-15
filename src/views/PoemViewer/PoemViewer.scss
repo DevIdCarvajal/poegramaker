@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+
+.last-verse{
+    margin-bottom: 15px;
+}
+
+span{
+    margin: 2px 2px;
+}
+
+
+.mainContainer{
+    color: red;
+
+    &__line{
+        color: black;
+        font-family: 'Nothing You Could Do', cursive;
+        font-size: 2rem;
+    }
+    &--fading-in{
+        opacity: 0;
+        animation-name: opacity-fade-in;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+    }
+
+    @keyframes opacity-fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @for $i from 1 through 80 {
+        &--fading-in {         
+          // :nth-child(1-6) 
+          &:nth-child(#{$i}) {
+            // Delay the animation. Delay increases as items loop.
+            animation-delay: $i * (1s /13);
+          }
+        }
+      }
+}
