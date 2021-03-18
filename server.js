@@ -1,8 +1,20 @@
 // const express = require("express");
 const axios = require('axios');
 const cheerio = require('cheerio');
-const MongoClient = require('mongodb').MongoClient;
-const urlDatabase = "mongodb://localhost:27017/";
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+
+//const MongoClient = require('mongodb').MongoClient;
+
+const urlDatabase = `${process.env.DB_PROT}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+const mongoOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+};
+
+mongoose.connect(urlDatabase, mongoOptions);
+
 
 // const app = express();
 // app.use(express.static(__dirname + "/build"));
@@ -13,10 +25,12 @@ const urlDatabase = "mongodb://localhost:27017/";
 // })
 
 async function scraper() {
-  const html = await axios.get('https://www.poemas-del-alma.com/el-rey-de-harlem.htm');
+  const urlPoem = process.argv[2] || 'https://www.poemas-del-alma.com/el-rey-de-harlem.htm';
+  const html = await axios.get(urlPoem);
   const $ = await cheerio.load(html.data);
 
   const title = $('h2.title-poem').text();
+  
   let verses = [];
   let p = 1;
   let first = true;
@@ -38,15 +52,18 @@ async function scraper() {
       else
         p++;
     });
+    
+    // Insert poem into database
+  const VerseSchema = new mongoose.Schema({ text: String, paragraph: Number }, { _id: false, autoIndex: false });
+  const PoemSchema = new mongoose.Schema({ title: String, verses: [VerseSchema] }, { versionKey: false });
+    
+    const Poem = mongoose.model('poems', PoemSchema);
 
-  MongoClient.connect(urlDatabase, { useUnifiedTopology: true }, (error, database) => {
-    if (error) throw error;
+    const newPoem = new Poem({ title, verses });
 
-    database.db("poetrydb").collection("poems").insertOne({ title, verses }, (error, response) => {
-      if (error) throw error;
-      database.close();
-    });
-  });
+    newPoem
+      .save()
+      .then(() => console.log("Ok poema ahora sí que sí"));
 }
 
 scraper();
