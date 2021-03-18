@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <base href="/">
+            <meta charset="utf-8" />
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    </head>
+
+    <body style="margin:0px;padding:0px;">
+        <div id="BookReader">
+    <noscript>
+    <p>
+        The BookReader requires JavaScript to be enabled. Please check that your browser supports JavaScript and that it is enabled in the browser settings.  You can also try one of the <a href="//www.archive.org/details/goodytwoshoes00newyiala"> other formats of the book</a>.
+    </p>
+    </noscript>
+</div>
+<div style="position: absolute; z-index: 999; width: 100%;bottom: 40px;"></div>
+
+<link rel="stylesheet" type="text/css" href="resources/ext/bookreader/BookReader.css"/>
+ <!-- Custom CSS overrides -->
+<link rel="stylesheet" type="text/css" href="resources/ext/bookreader/BookReaderDemo.css"/>
+
+<script type="text/javascript" src="resources/ext/bookreader/jquery-ui-1.8.5.custom.min.js"></script>
+<script type="text/javascript" src="resources/ext/bookreader/dragscrollable.js"></script>
+<script type="text/javascript" src="resources/ext/bookreader/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="resources/ext/bookreader/jquery.ui.ipad.js"></script>
+<script type="text/javascript" src="resources/ext/bookreader/jquery.bt.min.js"></script>
+<script type="text/javascript" src="resources/ext/bookreader/BookReader.js"></script>
+
+<script>
+
+    br = new BookReader();
+
+    // Return the width of a given page.  Here we assume all images are 800 pixels wide
+    br.getPageWidth = function(index) {
+        return 800;
+    }
+
+    // Return the height of a given page.  Here we assume all images are 1200 pixels high
+    br.getPageHeight = function(index) {
+        return 1200;
+    }
+
+    // We load the images from archive.org -- you can modify this function to retrieve images
+    // using a different URL structure
+    br.getPageURI = function(index, reduce, rotate) {
+        // reduce and rotate are ignored in this simple implementation, but we
+        // could e.g. look at reduce and load images from a different directory
+        // or pass the information to an image server
+        var leafStr = '000';
+        var imgStr = (index+1).toString();
+        var re = new RegExp("0{"+imgStr.length+"}$");
+        var url = 'https://reader.zlibcdn.com/books/7363bd4c70e29416a2a9bf9dc79625eb/'+ imgStr + '.jpg?server=storage00';
+		if(br.numLeafs === (index+1))
+        {
+        	//br.numLeafs = br.numLeafs + 10;
+        	//alert('gg');
+        }
+        return url;
+    }
+
+    // Return which side, left or right, that a given page should be displayed on
+    br.getPageSide = function(index) {
+        if (0 == (index & 0x1)) {
+            return 'R';
+        } else {
+            return 'L';
+        }
+    }
+
+    // This function returns the left and right indices for the user-visible
+    // spread that contains the given index.  The return values may be
+    // null if there is no facing page or the index is invalid.
+    br.getSpreadIndices = function(pindex) {
+        var spreadIndices = [null, null];
+        if ('rl' == this.pageProgression) {
+            // Right to Left
+            if (this.getPageSide(pindex) == 'R') {
+                spreadIndices[1] = pindex;
+                spreadIndices[0] = pindex + 1;
+            } else {
+                // Given index was LHS
+                spreadIndices[0] = pindex;
+                spreadIndices[1] = pindex - 1;
+            }
+        } else {
+            // Left to right
+            if (this.getPageSide(pindex) == 'L') {
+                spreadIndices[0] = pindex;
+                spreadIndices[1] = pindex + 1;
+            } else {
+                // Given index was RHS
+                spreadIndices[1] = pindex;
+                spreadIndices[0] = pindex - 1;
+            }
+        }
+
+        return spreadIndices;
+    }
+
+    // For a given "accessible page index" return the page number in the book.
+    //
+    // For example, index 5 might correspond to "Page 1" if there is front matter such
+    // as a title page and table of contents.
+    br.getPageNum = function(index) {
+        return index+1;
+    }
+
+    // Total number of leafs
+    br.numLeafs = 70;
+
+    // Book title and the URL used for the book title link
+    br.bookTitle= "Z-Library";
+    br.bookUrl  = 'http://b-ok.com/';
+
+    // Override the path used to find UI images
+    br.imagesBaseURL = '/bokreader/images/';
+
+    br.getEmbedCode = function(frameWidth, frameHeight, viewParams) {
+        return "Embed code not supported in bookreader demo.";
+    }
+
+    // Let's go!
+    br.init();
+
+    // read-aloud and search need backend compenents and are not supported in the demo
+    $('#BRtoolbar').find('.read').hide();
+    $('#textSrch').hide();
+    $('#btnSrch').hide();
+    $('#BRtoolbar').hide();
+
+</script>
+        <!-- ggAdditionalHtml -->
+        <!--LiveInternet counter--><script type="text/javascript">
+new Image().src = "//counter.yadro.ru/hit;bookzz?r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random();</script><!--/LiveInternet-->
+
+<iframe name="uploader" id="uploader" style="border:0px solid #ddd; width:90%; display:none;"></iframe><script></script>        <!-- /ggAdditionalHtml -->
+    </body>
+</html>
