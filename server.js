@@ -97,7 +97,7 @@ async function bufferize(url) {
 
 // }
 
-let pdfBuffer;
+
 
 function toArrayBuffer(buf) {
   var ab = new ArrayBuffer(buf.length);
@@ -108,8 +108,7 @@ function toArrayBuffer(buf) {
   console.log("arrayBuffer", ab)
   let bufferOk = Buffer.from(ab)
   console.log("buffer to json", bufferOk.toJSON());
-  pdfBuffer = bufferOk
-  writeJson()
+  writeJson(bufferOk.toString('utf8'))
   return ab;
 }
 
@@ -178,10 +177,8 @@ async function readlines(buffer, xwidth) {
 
 PDFParser = require("pdf2json");
 
-function writeJson(){
-  
+function writeJson(pdfBuffer){
   let pdfParser = new PDFParser();
-  
   pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError) );
   pdfParser.on("pdfParser_dataReady", pdfData => {
     fs.writeFile("./public/poems/poems3.json", pdfBuffer, () => {
@@ -191,11 +188,7 @@ function writeJson(){
   // pdfParser.on("pdfParser_dataReady", pdfData => {
   //   fs.writeFile("./public/poems/poems.json", JSON.stringify(pdfData));
   //   });
-    
     pdfParser.loadPDF("./public/pdfFiles/alfonsina-storni.pdf");
-
 }
-
-
 
 //app.listen(port, () => `Listening on ${port}`);
