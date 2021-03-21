@@ -4,6 +4,7 @@ import { paragraphsOptions, versesOptions } from '../../providers/authors'
 import PoetryProvider from '../../providers/PoetryProvider.class'
 import './PoemOptions.css'
 
+
 export default function PoemOptions({ getValues }) {
 
     const [author, setAuthor] = useState("")
@@ -35,25 +36,33 @@ export default function PoemOptions({ getValues }) {
     }
 
     const handleClick = () => {
-        getValues({ author, book, paragraphs, verses })
+        if(author && book && paragraphs && verses){
+            getValues({ author, book, paragraphs, verses })
+        }
     }
 
     return (
         <div className="form-container">
             <div className="select-container">
-                <Select type={"author"} value={author} data={poetryData.getAuthors()} getValue={getSelectedAuthor} field={"Elige un autor..."}/>
+                <Select type={"author"} value={author} data={poetryData.getAuthors()} getValue={getSelectedAuthor} field={"Elige un autor"}/>
             </div>
             <div className="select-container">
-                <Select type={"titles"} data={authorTitles} getValue={getSelectedBook} field={"Elige una obra..."}/>    
+                <Select type={"titles"} data={authorTitles} getValue={getSelectedBook} field={"Elige una obra"}/>    
             </div>
             <div className="select-container">
-                <Select type={"paragraphs"} data={paragraphsOptions} getValue={getSelectedParagraphs} field={"Elige la cantidad de estrofas..."}/>
+                <Select type={"paragraphs"} data={paragraphsOptions} getValue={getSelectedParagraphs} field={"N° de estrofas"}/>
             </div>
             <div className="select-container">
-                <Select type={"verses"} data={versesOptions} getValue={getSelectedVerses} field={"Elige la cantidad de versos..."}/>
+                <Select type={"verses"} data={versesOptions} getValue={getSelectedVerses} field={"N° de versos"}/>
             </div>
             <div className="select-container">
-                <button className="button" onClick={() => handleClick()}>Generar Poema</button>
+                <button 
+                className="button" 
+                onClick={() => handleClick()}
+                disabled={author && book && paragraphs && verses ? false : true}
+                >
+                    crear poema
+                </button>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
 
 .last-verse{
     margin-bottom: 15px;
@@ -8,14 +8,31 @@ span{
     margin: 2px 2px;
 }
 
+.chip-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 60px;
+}
 
 .mainContainer{
     color: red;
 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+  
+
     &__line{
-        color: black;
-        font-family: 'Nothing You Could Do', cursive;
-        font-size: 2rem;
+        color: #000;
+        font-family: 'Homemade Apple';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 32px;
+        letter-spacing: 0.25px;
     }
     &--fading-in{
         opacity: 0;
@@ -44,3 +61,46 @@ span{
         }
       }
 }
+
+.back-button{
+    background: #ED7D1A;
+    box-shadow: 0px 2px 8px rgba(38, 19, 3, 0.2);
+    border-radius: 3px;
+    border: none;
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    padding: 11px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.back-button-img{
+    width: 16px;
+    height: 14px;
+}
+
+.back-button:hover{
+    background-color: #d07220;
+}
+
+@media only screen and (max-width: 768px) {
+   .mainContainer{
+       padding: 40px 40px;
+
+       &__line{
+        color: #000;
+        font-family: 'Inria Sans';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 300;
+        letter-spacing: 0.25px;
+    }
+    span{
+        margin: 0px;
+    }
+   }
+  }

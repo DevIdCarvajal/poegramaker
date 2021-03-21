@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
 .form-container{
-    width: 100%;
     padding: 0px 0px 25px 0px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: flex-end;
 }
 
 .select-container{
@@ -13,24 +15,22 @@
 }
 
 .button{
-    background-color: #f19c79;
+    font-family: 'Homemade Apple';
+    background-color: #ED7D1A;
     color: white;
     font-weight: bold;
-    padding: 16px 32px;
-    border-radius: 4px;
+    padding: 8px 24px;
+    margin-top: 40px;
+    box-shadow: 0px 2px 8px rgba(38, 19, 3, 0.2);
+    border-radius: 3px;
     border: transparent;
-    box-shadow: 0px 8px 0px 0px #a44a3f;
-    text-transform: uppercase;
-    transform: translateY(0px);
-    transition: transform box-shadow 0.1s;
 }
 
 .button:hover{
-    background-color: #dd8965;
+    background-color: #d07220;
 }
 
-.button:active{
-    transform: translateY(5px);
+.button:disabled{
+    background-color: #c48d5e;
     box-shadow: none;
-
 }

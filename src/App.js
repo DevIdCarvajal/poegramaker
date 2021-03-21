@@ -1,39 +1,31 @@
  
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import PoemOptions from './views/PoemOptions/PoemOptions'
-import PoemViewer from './views/PoemViewer/PoemViewer'
-import Poemaker from './components/Poemaker/Poemaker'
+import DesktopView from './views/DesktopView/DesktopView'
+import MobileView from './views/MobileView/MobileView'
 import './App.css'
 
 function App() {
 
-  const [options, setOptions] = useState({})
-  const [poem, setPoem] = useState(null)
-  
-  useEffect(() => {
-    setPoem(null)
-    setTimeout(() => {
-      setPoem({
-        paragraphs: options.paragraphs,
-        verses: options.verses,
-        text: Poemaker(options.paragraphs, options.verses, options.book, options.author)
-      }) 
-    }, 1500);
-  }, [options])
+  const [mobile, setMobile] = useState(false)
 
-  const getValues = (values) =>{
-    setOptions(values)
+
+  useEffect(() => {
+    handleWindowSizeChange()
+    window.addEventListener('resize', handleWindowSizeChange);
+    console.log("first loading", window.innerWidth)
+  }, [])
+
+  const handleWindowSizeChange = () => {
+  window.innerWidth >= 768 ? setMobile(false) : setMobile(true)
   }
 
   return (
     <div className="App">
-      <div className="options-container">
-        <PoemOptions getValues={getValues}/>
-      </div>
-      <div className="viewer-container">
-        { poem ? <PoemViewer poem={poem}/> : null }
-      </div>
+      {mobile ?
+        <MobileView />
+      :
+        <DesktopView />  
+      }
     </div>
   );
 }

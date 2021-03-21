@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0;
+}
+
+.DesktopView{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.options-container-desktop{
+  width: 48%;
+  height: 100vh;
+  background-color: #feefdc;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+.poem-options-container-desktop{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 125px;
+}
+
+.logo-container-desktop{
+    display: flex;
+    margin: 51px 0px 0px 60px;
+}
+
+.logo-text-desktop{
+    font-family: 'Homemade Apple';
+    margin-left: 8px;
+}
+
+.viewer-container-desktop{
+  background-color: #FFF5E6;
+  width: 62%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../PoemViewer/assets/home-bg.svg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right bottom;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .DesktopView{
+    flex-direction: column;
+  }
+  .options-container-desktop, .viewer-container-desktop{
+    width: 100%;
+  }
+  .options-container-desktop{
+    height: 100%;
+  }
+  .viewer-container-desktop{
+    height: 100%;
+    padding: 30px;
+  }
+
+}

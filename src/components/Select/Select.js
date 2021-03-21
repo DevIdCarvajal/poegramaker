@@ -22,7 +22,6 @@ export default function Select({type, data, value, getValue, field}) {
 
     return (
         <React.Fragment>
-            <p className="select-label">{}</p>
             <select name={type} value={value} onChange={(e) => getValue(e.target.value)} className="select">
                 <option value="">{field}</option>
                 {renderOptions(type)}
