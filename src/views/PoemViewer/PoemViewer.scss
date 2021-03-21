@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap');
 
 .last-verse{
     margin-bottom: 15px;
@@ -33,7 +34,22 @@ span{
         font-size: 20px;
         line-height: 32px;
         letter-spacing: 0.25px;
+        opacity: 0;
+        animation-name: opacity-fade-in;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
     }
+
+    @for $i from 0 through 80 {
+        &__line {         
+          // :nth-child(1-6) 
+          &:nth-child(#{$i}) {
+            // Delay the animation. Delay increases as items loop.
+            animation-delay: $i * (2s);
+          }
+        }
+      }
     &--fading-in{
         opacity: 0;
         animation-name: opacity-fade-in;
@@ -51,12 +67,12 @@ span{
         }
     }
 
-    @for $i from 1 through 80 {
+    @for $i from 1 through 800 {
         &--fading-in {         
           // :nth-child(1-6) 
           &:nth-child(#{$i}) {
             // Delay the animation. Delay increases as items loop.
-            animation-delay: $i * (1s /13);
+            animation-delay: $i * (4s/10);
           }
         }
       }
@@ -87,7 +103,8 @@ span{
 
 @media only screen and (max-width: 768px) {
    .mainContainer{
-       padding: 40px 40px;
+        padding: 40px 40px 0px 40px;
+        height: calc(100vh - 40px);
 
        &__line{
         color: #000;

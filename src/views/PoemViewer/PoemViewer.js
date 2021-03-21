@@ -6,14 +6,13 @@ import "./PoemViewer.scss";
 
 const PoemViewer = (props) => {
   // const { verses, text, author, paragraphs, book } = props.poem;
+  
   const { loading, chips, mobile, poem, getStep } = props;
 
   const renderPoem = () => {
     return poem.text.map((verse, index) => (
       <p
-        className={`${
-          !((index + 1) % poem.verses) && "last-"
-        }verse mainContainer__line`}
+        className={`${!((index + 1) % poem.verses) ? "last-" : ''}verse mainContainer__line`}
         key={`verse-${index}`}
       >
         {verse.split("").map((e, j) => (
