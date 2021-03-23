@@ -25,29 +25,31 @@ let poems = [];
 
             // On data ready
             pdfParser.on("pdfParser_dataReady", (pdfData) => {
-
+                let verses = []
                 // The raw PDF data in text form
-                const raw = pdfParser.getRawTextContent().replace(" ");
-                console.log(raw)
-                // //Return the parsed data
-                resolve({
-                    id: /id\s(.*?)idBook/i.exec(raw),
-                    idBook: /idBook\s(.*?)title/i.exec(raw),
-                    title: /title\s(.*?)paragraphs/i.exec(raw),
-                    paragraphs: /paragraphs\s(.*?)--/i.exec(raw),
-            });
-            
-        });
+                const raw = pdfParser
+                    .getRawTextContent()
+                    .split("\r\n")
+                    .filter( line => !/\-{16}Page\s\(\d+\)\sBreak\-{16}/g.test(line) )
+                    .map(line => {
+                        const verse = line.trim();
+                        verses.push(verse);
+                        console.log(verse)
+                        })              
+                        // //Return the parsed data
+                        resolve({
+                            text: verses
+                        });
+                        
+                    });
         
     });
-    // Add the patient to the poems array
+    // Add the poems to the poems array
     poems.push(poem);
 }));
-
 
 // Save the extracted information to a json file
 const json_poems = JSON.stringify(poems);
 fs.writeFileSync("./public/poems/poem.json",json_poems, 'utf-8');
-
 
 })();  
