@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const urlDatabase = process.env.DB;
+const urlDatabase = process.env.DATABASE_URL;
 const mongoOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,

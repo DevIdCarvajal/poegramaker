@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const urlDatabase = process.env.DB;
+const urlDatabase = process.env.DATABASE_URL;
 const mongoOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
