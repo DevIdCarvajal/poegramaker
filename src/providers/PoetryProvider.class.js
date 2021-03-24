@@ -1,6 +1,8 @@
 export default class PoetryProvider {
   constructor() {}
-
+  // const AUTHORS_URL
+  // const getAuthors = await fetch(AUTHORS_URL)
+  // return getAuthors.JSON()
   getAuthors() {
     const authors = [
       {
@@ -17,6 +19,9 @@ export default class PoetryProvider {
   }
 
   getBooksByAuthor(id) {
+      // const BOOKS_URL
+      // const getBooks = await fetch(BOOKS_URL)
+      // return getBooks.JSON()
     const books = [
       {
         id: 1,
@@ -44,6 +49,9 @@ export default class PoetryProvider {
   }
 
   getPoemsByBook(id) {
+    // const POEMS_URL
+    // const getPoems = await fetch(POEMS_URL)
+    // return getPoems.JSON()
     const poems = [
       {
         id: 1,

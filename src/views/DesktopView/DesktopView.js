@@ -10,11 +10,13 @@ function DesktopView() {
   const [poem, setPoem] = useState(null);
   const [loading, setLoading] = useState(false);
   const [chips, setchips] = useState([]);
-  const [mobile, setMobile] = useState(false);
+  // const [mobile, setMobile] = useState(false);
 
 
   useEffect(() => {
     setPoem(null);
+    console.time("label")
+    console.log("use effect")
     setTimeout(() => {
       setPoem({
         paragraphs: options.paragraphs,
@@ -27,13 +29,14 @@ function DesktopView() {
         ),
       });
       setchips([
-        options.author,
+        options.author, // HAY QUE VER ESTO !!!!
         options.book,
         options.paragraphs,
         options.verses,
       ]);
       setLoading(false);
-    }, 5000);
+      console.timeEnd("label")
+    }, 15000);
   }, [options]);
 
   const getValues = (values) => {
@@ -52,12 +55,12 @@ function DesktopView() {
           <PoemOptions getValues={getValues} />
         </div>
       </div>
-      <div className="viewer-container-desktop">
+      <div className={`viewer-container-desktop ${loading ? 'no-img' : ''}`}>
         <PoemViewer
           poem={poem}
           loading={loading}
           chips={chips}
-          mobile={mobile}
+          mobile={false}
         />
       </div>
     </div>

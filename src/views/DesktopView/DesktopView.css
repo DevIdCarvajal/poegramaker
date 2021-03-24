@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 .viewer-container-desktop{
-  background-color: #FFF5E6;
+  background-color: #fff5e6;
   width: 62%;
   height: 100vh;
   display: flex;
@@ -49,6 +49,9 @@ h1, h2, h3, h4, h5, h6, p{
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: right bottom;
+}
+.no-img{
+  background-image: none;
 }
 
 

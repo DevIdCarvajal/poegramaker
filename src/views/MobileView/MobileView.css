@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6, p{
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin: auto;
 }
 
 .logo-container{
@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 .viewer-container{
-  background-color: #FFF5E6;
+  background-color: #fff5e6;
   height: 100vh;
   display: flex;
   justify-content: center;

@@ -39,6 +39,7 @@ export default function PoemOptions({ getValues }) {
         if(author && book && paragraphs && verses){
             getValues({ author, book, paragraphs, verses })
         }
+        console.log("click")
     }
 
     return (

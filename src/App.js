@@ -16,7 +16,7 @@ function App() {
   }, [])
 
   const handleWindowSizeChange = () => {
-  window.innerWidth >= 768 ? setMobile(false) : setMobile(true)
+  window.innerWidth > 768 ? setMobile(false) : setMobile(true)
   }
 
   return (

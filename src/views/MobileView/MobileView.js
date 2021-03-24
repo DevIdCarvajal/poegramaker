@@ -14,7 +14,7 @@ function MobileView() {
 
   useEffect(() => {
     setPoem(null);
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       setPoem({
         paragraphs: options.paragraphs,
         verses: options.verses,
@@ -32,7 +32,8 @@ function MobileView() {
         `${options.verses} versos`
       ]);
       setLoading(false);
-    }, 5000);
+    }, 15000);
+    return () => clearTimeout(timer)
   }, [options]);
 
   // useEffect(() => {

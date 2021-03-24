@@ -34,3 +34,12 @@
     background-color: #c48d5e;
     box-shadow: none;
 }
+
+@media only screen and (max-width: 768px) {
+    .form-container{
+        width: 100%;
+    }
+    .select-container{
+        width: 100%;
+    }
+}
