@@ -32,7 +32,7 @@ function MobileView() {
         `${options.verses} versos`
       ]);
       setLoading(false);
-    }, 15000);
+    }, 12000);
     return () => clearTimeout(timer)
   }, [options]);
 
@@ -59,7 +59,7 @@ function MobileView() {
             <p className="logo-text">Random Poetry</p>
           </div>
           <div className="poem-options-container">
-            <PoemOptions getValues={getValues} />
+            <PoemOptions getValues={getValues} loading={loading}/>
           </div>
         </div>
       ) : (

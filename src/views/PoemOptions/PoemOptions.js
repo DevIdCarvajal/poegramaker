@@ -5,9 +5,10 @@ import PoetryProvider from '../../providers/PoetryProvider.class'
 import './PoemOptions.css'
 
 
-export default function PoemOptions({ getValues }) {
+export default function PoemOptions({ getValues, loading }) {
 
     const [author, setAuthor] = useState("")
+    const [allAuthors, setAllAuthors] = useState(null)
     const [authorTitles, setAuthorTitles] = useState([])
     const [book, setBook] = useState("")
     const [paragraphs, setParagraphs] = useState(0)
@@ -15,15 +16,25 @@ export default function PoemOptions({ getValues }) {
 
     const poetryData = new PoetryProvider()
 
+    const getAllAuthors = () => poetryData.getAuthors().then(res => setAllAuthors(res))
+    const getAllBooks = () => poetryData.getBooksByAuthor(author).then(res => setAuthorTitles(res))
+    const getAllPoems = () => poetryData.getPoemsByBook(book).then(res => console.log(res))
+
     const getSelectedAuthor = (value) => {
         setAuthor(Number(value))
     }
 
     useEffect( () => {
-        const result = poetryData.getBooksByAuthor(author)
-        setAuthorTitles(result)
-        console.log("cargar titulos del autor", result)
+        getAllAuthors()
+    }, [])
+
+    useEffect(() => {
+        getAllBooks()
     }, [author])
+  
+    useEffect(() => {
+        getAllPoems()
+    }, [book])
 
     const getSelectedBook = (value) => {
         setBook(Number(value))
@@ -45,7 +56,7 @@ export default function PoemOptions({ getValues }) {
     return (
         <div className="form-container">
             <div className="select-container">
-                <Select type={"author"} value={author} data={poetryData.getAuthors()} getValue={getSelectedAuthor} field={"Elige un autor"}/>
+                <Select type={"author"} value={author} data={allAuthors} getValue={getSelectedAuthor} field={"Elige un autor"}/>
             </div>
             <div className="select-container">
                 <Select type={"titles"} data={authorTitles} getValue={getSelectedBook} field={"Elige una obra"}/>    
@@ -60,7 +71,7 @@ export default function PoemOptions({ getValues }) {
                 <button 
                 className="button" 
                 onClick={() => handleClick()}
-                disabled={author && book && paragraphs && verses ? false : true}
+                disabled={author && book && paragraphs && verses && !loading ? false : true}
                 >
                     crear poema
                 </button>

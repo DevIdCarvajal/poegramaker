@@ -6,37 +6,37 @@ import logo from "../PoemOptions/assets/logo.svg";
 import "./DesktopView.css";
 
 function DesktopView() {
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState(null);
   const [poem, setPoem] = useState(null);
   const [loading, setLoading] = useState(false);
   const [chips, setchips] = useState([]);
   // const [mobile, setMobile] = useState(false);
 
 
-  useEffect(() => {
-    setPoem(null);
-    console.time("label")
-    console.log("use effect")
-    setTimeout(() => {
-      setPoem({
-        paragraphs: options.paragraphs,
-        verses: options.verses,
-        text: Poemaker(
+  useEffect(async () => {
+    if(options){
+      const result = await Poemaker(options.paragraphs, options.verses, options.book, options.author)
+      const text = result
+      console.log("text en DESKTOPVIEW", text)
+      setPoem(null);
+      console.time("label")
+      console.log("use effect")
+      setTimeout(() => {
+        setPoem({
+          paragraphs: options.paragraphs,
+          verses: options.verses,
+          text: text
+        });
+        setchips([
+          options.author, // HAY QUE VER ESTO !!!!
+          options.book,
           options.paragraphs,
           options.verses,
-          options.book,
-          options.author
-        ),
-      });
-      setchips([
-        options.author, // HAY QUE VER ESTO !!!!
-        options.book,
-        options.paragraphs,
-        options.verses,
-      ]);
-      setLoading(false);
-      console.timeEnd("label")
-    }, 15000);
+        ]);
+        setLoading(false);
+        console.timeEnd("label")
+      }, 12000);
+    }
   }, [options]);
 
   const getValues = (values) => {
@@ -52,7 +52,7 @@ function DesktopView() {
           <p className="logo-text-desktop">Random Poetry</p>
         </div>
         <div className="poem-options-container-desktop">
-          <PoemOptions getValues={getValues} />
+          <PoemOptions getValues={getValues} loading={loading}/>
         </div>
       </div>
       <div className={`viewer-container-desktop ${loading ? 'no-img' : ''}`}>

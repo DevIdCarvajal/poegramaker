@@ -10,21 +10,22 @@ const PoemViewer = (props) => {
   const { loading, chips, mobile, poem, getStep } = props;
 
   const renderPoem = () => {
-    return poem.text.map((verse, index) => (
-      <p
-        className={`${!((index + 1) % poem.verses) ? "last-" : ''}verse mainContainer__line`}
-        key={`verse-${index}`}
-      >
-        {verse.split("").map((e, j) => (
-          <span
-            className="mainContainer--fading-in"
-            key={`verse-letter-${index}-${j}`}
-          >
-            {e}
-          </span>
-        ))}
-      </p>
-    ));
+    console.log("poem en poemviewer", poem)
+    // return poem.text.map((verse, index) => (
+    //   <p
+    //     className={`${!((index + 1) % poem.verses) ? "last-" : ''}verse mainContainer__line`}
+    //     key={`verse-${index}`}
+    //   >
+    //     {verse.split("").map((e, j) => (
+    //       <span
+    //         className="mainContainer--fading-in"
+    //         key={`verse-letter-${index}-${j}`}
+    //       >
+    //         {e}
+    //       </span>
+    //     ))}
+    //   </p>
+    // ));
   };
 
   const renderChips = () => {
