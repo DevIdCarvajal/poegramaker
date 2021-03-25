@@ -19,6 +19,20 @@ mongoose.connect(urlDatabase, mongoOptions);
 const server = express();
 const port = 8080;
 
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
+
+server.use(cors());
+server.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+server.get("/", function(req, res) {
+  res.status(200).json({ error: "Endpoint without data" });
+});
+
 server.get("/authors", function(req, res) {
   Author.find({}, function (err, docs) {
     if (err) {
