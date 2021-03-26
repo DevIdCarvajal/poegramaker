@@ -10,4 +10,4 @@ export const authors = [
 
 export const paragraphsOptions = [1, 2, 3]
 
-export const versesOptions = [2, 3, 4, "Random"]
+export const versesOptions = [2, 3, 4]

@@ -15,17 +15,15 @@ function DesktopView() {
 
   useEffect(async () => {
     if(options){
+      console.log("opciones", options)
       const result = await Poemaker(options.paragraphs, options.verses, options.book, options.author)
-      const text = result
-      console.log("text en DESKTOPVIEW", text)
+      console.log("resultado del fetch en desktop", result)
       setPoem(null);
-      console.time("label")
-      console.log("use effect")
       setTimeout(() => {
         setPoem({
           paragraphs: options.paragraphs,
           verses: options.verses,
-          text: text
+          text: result
         });
         setchips([
           options.author, // HAY QUE VER ESTO !!!!
@@ -34,7 +32,6 @@ function DesktopView() {
           options.verses,
         ]);
         setLoading(false);
-        console.timeEnd("label")
       }, 12000);
     }
   }, [options]);

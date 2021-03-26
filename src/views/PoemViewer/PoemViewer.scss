@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap');
 
 .last-verse{
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 span{
@@ -15,10 +15,11 @@ span{
     width: 100%;
     margin-bottom: 60px;
 }
+.poem-container{
+    margin: 0px 10%;
+}
 
 .mainContainer{
-    color: red;
-
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -32,7 +33,7 @@ span{
         font-style: normal;
         font-weight: normal;
         font-size: 20px;
-        line-height: 32px;
+        line-height: 40px;
         letter-spacing: 0.25px;
         opacity: 0;
         animation-name: opacity-fade-in;
@@ -46,16 +47,17 @@ span{
           // :nth-child(1-6) 
           &:nth-child(#{$i}) {
             // Delay the animation. Delay increases as items loop.
-            animation-delay: $i * (2s);
+            animation-delay: $i * (1s/5);
           }
         }
       }
     &--fading-in{
-        opacity: 0;
-        animation-name: opacity-fade-in;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-        animation-timing-function: ease;
+        // opacity: 0;
+        // animation-name: opacity-fade-in;
+        // animation-duration: 1s;
+        // animation-fill-mode: forwards;
+        // animation-timing-function: ease;
+        margin: 20px 2px;
     }
 
     @keyframes opacity-fade-in {
@@ -67,15 +69,15 @@ span{
         }
     }
 
-    @for $i from 1 through 800 {
-        &--fading-in {         
-          // :nth-child(1-6) 
-          &:nth-child(#{$i}) {
-            // Delay the animation. Delay increases as items loop.
-            animation-delay: $i * (4s/10);
-          }
-        }
-      }
+    // @for $i from 1 through 800 {
+    //     &--fading-in {         
+    //       // :nth-child(1-6) 
+    //       &:nth-child(#{$i}) {
+    //         // Delay the animation. Delay increases as items loop.
+    //         animation-delay: $i * (1s/10);
+    //       }
+    //     }
+    //   }
 }
 
 .back-button{

@@ -16,9 +16,9 @@ export default function PoemOptions({ getValues, loading }) {
 
     const poetryData = new PoetryProvider()
 
-    const getAllAuthors = () => poetryData.getAuthors().then(res => setAllAuthors(res))
-    const getAllBooks = () => poetryData.getBooksByAuthor(author).then(res => setAuthorTitles(res))
-    const getAllPoems = () => poetryData.getPoemsByBook(book).then(res => console.log(res))
+    const getAllAuthors = () => poetryData.getAuthors().then(res => setAllAuthors(res.filter(e => e._id !== 3)))
+    const getAllBooks = (id) => poetryData.getBooksByAuthor(id).then(res => setAuthorTitles(res))
+    // const getAllPoems = () => poetryData.getPoemsByBook(book).then(res => console.log(res))
 
     const getSelectedAuthor = (value) => {
         setAuthor(Number(value))
@@ -27,15 +27,13 @@ export default function PoemOptions({ getValues, loading }) {
     useEffect( () => {
         getAllAuthors()
     }, [])
-
+    
     useEffect(() => {
-        getAllBooks()
+        if(author){
+            getAllBooks(author)
+        }
     }, [author])
   
-    useEffect(() => {
-        getAllPoems()
-    }, [book])
-
     const getSelectedBook = (value) => {
         setBook(Number(value))
     }
@@ -71,7 +69,7 @@ export default function PoemOptions({ getValues, loading }) {
                 <button 
                 className="button" 
                 onClick={() => handleClick()}
-                disabled={author && book && paragraphs && verses && !loading ? false : true}
+                disabled={author && book && paragraphs && verses && !loading? false : true}
                 >
                     crear poema
                 </button>

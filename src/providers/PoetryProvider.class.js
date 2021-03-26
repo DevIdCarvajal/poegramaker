@@ -28,11 +28,15 @@ export default class PoetryProvider {
   }
 
   async getPoemsByBook(id) {
+    console.log("book id", `${this.BASE_URL}/poems/${id}`)
     return new Promise((resolve, reject) => {
-      fetch(`${this.BASE_URL}/poems/${id}`).then((res) => {
+      return fetch(`${this.BASE_URL}/poems/${id}`).then((res) => {
         if (res.status === 200) {
-          resolve(res.json());
+          const result = res.json()
+          console.log("lo que llega a getPoemsByBook", result)
+          resolve(result);
         } else {
+          console.log("error en res", res.message)
           reject(res.message);
         }
       });

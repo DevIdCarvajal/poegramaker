@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PoetryProvider from '../../providers/PoetryProvider.class'
 import PoemOptions from "../PoemOptions/PoemOptions";
 import PoemViewer from "../PoemViewer/PoemViewer";
 import Poemaker from "../../components/Poemaker/Poemaker";
@@ -8,37 +9,38 @@ import "./MobileView.css";
 function MobileView() {
   const [options, setOptions] = useState({});
   const [poem, setPoem] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [chips, setChips] = useState([]);
   const [step, setStep] = useState(0);
 
-  useEffect(() => {
+  const poetryData = new PoetryProvider()
+
+  useEffect(async() => {
     setPoem(null);
-    let timer = setTimeout(() => {
+    if(options?.author && options?.paragraphs && options?.verses && options?.book){
+      const result = await Poemaker(options.paragraphs, options.verses, options.book, options.author)
+      const selectedAuthors = await getAllAuthors()
+      const selectedBooks = await getAllBooks(options.author)
       setPoem({
         paragraphs: options.paragraphs,
         verses: options.verses,
-        text: Poemaker(
-          options.paragraphs,
-          options.verses,
-          options.book,
-          options.author
-        ),
+        text: result
       });
       setChips([
-        options.author === '1'? 'Federico García Lorca' : 'Rosalía de Castro',
-        'Poeta en Nueva York',
+        `${selectedAuthors.filter(e => e._id === options.author)[0].name}`,
+        `${selectedBooks.filter(e => e._id === options.book)[0].title}`,
         `${options.paragraphs} estrofas`,
         `${options.verses} versos`
       ]);
-      setLoading(false);
-    }, 12000);
-    return () => clearTimeout(timer)
+      setTimeout(() => {
+        setLoading(false);
+      }, 12000);
+    }
+
   }, [options]);
 
-  // useEffect(() => {
-  //   poem?.paragraphs ? setStep(1) : setStep(0);
-  // }, [poem]); 
+  const getAllAuthors = () => poetryData.getAuthors().then(res => res)
+  const getAllBooks = (id) => poetryData.getBooksByAuthor(id).then(res => res)
 
   const getValues = (values) => {
     setOptions(values);

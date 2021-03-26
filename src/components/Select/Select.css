@@ -23,6 +23,10 @@
     background: #fff5e6 url('./assets/down-arrow.png') 97% center no-repeat ;
 }
 
+.select:disabled{
+    opacity: 0.5;
+}
+
 
 @media only screen and (max-width: 768px) {
     .select{
